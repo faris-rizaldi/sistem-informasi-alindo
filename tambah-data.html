@@ -239,13 +239,21 @@
                                       <label for="first-name-column"
                                         >Kota Asal</label
                                       >
-                                      <input
-                                        type="text"
-                                        id="first-name-column"
-                                        class="form-control"
-                                        placeholder="Masukkan Kota Asal"
-                                        name="fname-column"
-                                      />
+                                      <select
+                                        name="kota-asal"
+                                        class="form-select"
+                                        id="kota-asal"
+                                      >
+                                        <option selected>
+                                          Pilih Kota Asal
+                                        </option>
+                                        <option value="Yogyakarta">
+                                          Yogyakarta
+                                        </option>
+                                        <option value="lainnya">Lainnya</option>
+                                      </select>
+                                      <!-- name atribut ad di js -->
+                                      <div id="kota-asal-lainnya"></div>
                                     </div>
                                   </div>
                                   <div class="col-md-6 col-12">
@@ -467,5 +475,28 @@
     </div>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/app.js"></script>
+    <script>
+      function actionKotaAsal() {
+        const kotaAsal = document.getElementById("kota-asal");
+        const kotaAsalLainnya = document.getElementById("kota-asal-lainnya");
+        if (kotaAsal.value == "lainnya") {
+          // remove name tag
+          kotaAsal.removeAttribute("name");
+
+          const inputForm = document.createElement("input");
+          inputForm.setAttribute("type", "text");
+          inputForm.setAttribute("name", "kota-asal");
+          inputForm.setAttribute("class", "box-input");
+          inputForm.setAttribute("placeholder", "Masukkan nama kota");
+
+          kotaAsalLainnya.appendChild(inputForm);
+        } else {
+          if (kotaAsalLainnya.children.length > 0) {
+            kotaAsalLainnya.removeChild(kotaAsalLainnya.children[0]);
+          }
+          kotaAsal.setAttribute("name", "kota-asal");
+        }
+      }
+    </script>
   </body>
 </html>
